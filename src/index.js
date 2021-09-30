@@ -22,7 +22,7 @@ const templateReducer = (state = [], action) => {
 function* getImages(action) {
     try {
         const imageResponse = yield axios.get(`/api/giphy/${action.payload}`);
-        yield put({ type: 'SET_IMAGES', payload: imageResponse.data });
+        yield put({ type: 'SET_IMAGES', payload: imageResponse.data.data });
     } catch (error) {
         console.log(error);
     }

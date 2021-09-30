@@ -1,0 +1,10 @@
+.gif-box {
+    float: left;
+    border: 3px solid black;
+    align-content: center;
+    margin: auto;
+}
+
+button {
+    margin: auto;
+}
