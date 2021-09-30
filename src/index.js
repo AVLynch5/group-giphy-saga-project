@@ -11,28 +11,29 @@ import logger from 'redux-logger';
 
 const templateReducer = (state = [], action) => {
     console.log('here is a reducer');
-    switch(action.type){
+    switch (action.type) {
         case 'SET_IMAGES':
             return action.payload;
-            default:
-    return state;
+        default:
+            return state;
+    }
 };//end reducer function*/
 
-function* getImages (action){
-    try{
+function* getImages(action) {
+    try {
         const imageResponse = yield axios.get(`/api/giphy/${action.payload}`);
-        yield put({type: 'SET_IMAGES', payload: imageResponse.data});
-    }catch(error){
+        yield put({ type: 'SET_IMAGES', payload: imageResponse.data });
+    } catch (error) {
         console.log(error);
     }
 }//end saga function*/
 
-function* createImage(action){
-    try{
-        yield axios.post(`/api/giphy/${action.payload}`, {newImage: action.payload});
-        yield put ({type: 'GET_IMAGES'})
-    }catch(error){
-        console.log(error)
+function* createImage(action) {
+    try {
+        yield axios.post(`/api/giphy/${action.payload}`, { newImage: action.payload });
+        yield put({ type: 'GET_IMAGES' });
+    } catch (error) {
+        console.log(error);
     }
 }//end saga function*/
 
@@ -41,8 +42,8 @@ function* watcherSaga() {
     console.log('in watcherSaga');
     //yield takeEvery(type, function);
     yield takeEvery('GET_IMAGES', getImages);
-    yield takeEvery('CREATE_IMAGE', createImage)
-    
+    yield takeEvery('CREATE_IMAGE', createImage);
+
 }
 
 const sagaMiddleware = createSagaMiddleware();

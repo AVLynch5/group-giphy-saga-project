@@ -1,8 +1,8 @@
-import React, {useState}from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 function Search() {
-    const dispatch=useDispatch();
+    const dispatch = useDispatch();
 
     //state var - newSearch
     const [newSearch, setNewSearch] = useState('');
@@ -12,7 +12,7 @@ function Search() {
 
     //function searchGifs - dispatch GET API
     const searchGifs = () => {
-        dispatch({type: 'GET_IMAGES', payload: newSearch});
+        dispatch({ type: 'GET_IMAGES', payload: newSearch });
         setRecentSearch(newSearch);
         setNewSearch('');
     }
@@ -20,22 +20,22 @@ function Search() {
     //access redux store - templateReducer - array of gif objects
     const templateReducer = useSelector(store => store.templateReducer);
 
-    return(
+    return (
         <>
             <h3>Search for GIFs by keyword:</h3>
             <p>Most recent search: <span>{recentSearch}</span></p>
             <form onSubmit={searchGifs}>
-                <input required type="text" value={newSearch} onChange={(event) => setNewSearch(event.target.value)}>keyword</input>
+                <input required type="text" placeholder='Keyword' value={newSearch} onChange={(event) => setNewSearch(event.target.value)} />
                 <button type="submit">Search</button>
             </form>
             <p>Results</p>
-                <ul>
+            {/* <ul>
                     {templateReducer.map((image) => {
                         return(<li>Bananas</li>);
                     })}
-                </ul>
-                
-            
+                </ul> */}
+
+
         </>
     );
 }

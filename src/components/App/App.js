@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import { HashRouter as Router, Route, Link } from 'react-router-dom';
+import Search from '../Search/Search';
 
 //import form here
 //import gif list here
@@ -18,7 +19,7 @@ function App(props) {
         </Route>
         <Route exact path="/search">
       <h1>Giphy Search!</h1>
-      {/* go to form component */}
+      <Search />
       {/* go to displayGifs */}
       </Route>
         <Route exact path="/favorites">
