@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import SearchItem from './SearchItem';
 
 function Search() {
     const dispatch = useDispatch();
@@ -9,6 +10,10 @@ function Search() {
 
     //state var - most recent search
     const [recentSearch, setRecentSearch] = useState('');
+
+    // useEffect(() => {
+    //     searchGifs();
+    // }, []);
 
     //function searchGifs - dispatch GET API
     const searchGifs = () => {
@@ -29,13 +34,15 @@ function Search() {
                 <button type="submit">Search</button>
             </form>
             <p>Results</p>
-            {/* <ul>
-                    {templateReducer.map((image) => {
-                        return(<li>Bananas</li>);
+            {/* {JSON.stringify(templateReducer.data[0].images.fixed_height.url)} */}
+            {/* {JSON.stringify(templateReducer.data[0].images.fixed_height.url)} */}
+
+            <ul>
+                    {templateReducer.map((image, i) => {
+                        return <SearchItem key={i} image={image}/>
+                        // return(<li key={image.id}><img src={image.images.fixed_height.url}/></li>);
                     })}
-                </ul> */}
-
-
+                </ul>
         </>
     );
 }
