@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import { HashRouter as Router, Route, Link } from 'react-router-dom';
 import Search from '../Search/Search';
+import FavoriteList from '../FavoriteList/FavoriteList';
 
 //import form here
 //import gif list here
