@@ -30,6 +30,27 @@ const favoritesList = (state = [], action) => {
     }
 }
 
+//reducer to hold list of categories 
+const categoriesList = (state = [], action) => {
+    console.log('in categoriesList');
+    switch (action.type) {
+        case 'GET_CATEGORIES':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
+//get categories to be displayed in dropdown
+function* getCategories() {
+    try {
+        const categoryResponse = yield axios.get('/api/category');
+        yield put({type: 'GET_CATEGORIES', payload: categoryResponse.data})
+    } catch(error) {
+        console.log(error);
+    }
+}
+
 //get images to be displayed on search page
 function* getImages(action) {
     try {
@@ -67,6 +88,7 @@ function* watcherSaga() {
     yield takeEvery('GET_IMAGES', getImages);
     yield takeEvery('FAVORITE_IMAGE', setFavoriteImage);
     yield takeEvery('GET_FAVORITES', getFavoriteImages);
+    yield takeEvery('GET_CATEGORY_OPTIONS', getCategories);
 
 }
 
