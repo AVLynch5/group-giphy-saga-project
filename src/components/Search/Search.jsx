@@ -35,14 +35,12 @@ function Search() {
             </form>
             <p>Results</p>
             {/* {JSON.stringify(templateReducer.data[0].images.fixed_height.url)} */}
-            {/* {JSON.stringify(templateReducer.data[0].images.fixed_height.url)} */}
 
             <ul>
-                    {templateReducer.map((image, i) => {
-                        return <SearchItem key={i} image={image}/>
-                        // return(<li key={image.id}><img src={image.images.fixed_height.url}/></li>);
-                    })}
-                </ul>
+                {templateReducer.map((image, i) => {
+                    return <SearchItem key={i} image={image} recentSearch = {recentSearch}/>
+                })}
+            </ul>
         </>
     );
 }
