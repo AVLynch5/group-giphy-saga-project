@@ -32,8 +32,8 @@ router.post('/', (req, res) => {
     .then(() => { res.sendStatus(201); })
     .catch((error) => {
       console.log('Error posting favorite query', error);
-  res.sendStatus(500);
-  });
+      res.sendStatus(500);
+    });
 });
 
 

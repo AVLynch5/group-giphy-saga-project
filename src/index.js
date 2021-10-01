@@ -74,7 +74,7 @@ function* setFavoriteImage(action) {
 function* getFavoriteImages() {
     try {
         const favoritesResponse = yield axios.get(`/api/favorite`);
-        yield put({ type: 'DISPLAY_FAVORITE_IMAGES', payload: favoritesResponse.data.data })
+        yield put({ type: 'DISPLAY_FAVORITE_IMAGES', payload: favoritesResponse.data })
 
     } catch (error) {
         console.log(error);
@@ -96,7 +96,8 @@ const sagaMiddleware = createSagaMiddleware();
 
 const reduxStore = createStore(
     combineReducers({
-        templateReducer
+        templateReducer,
+        favoritesList,
     }),
     applyMiddleware(sagaMiddleware, logger),
 );
