@@ -19,6 +19,18 @@ const templateReducer = (state = [], action) => {
     }
 };//end reducer function*/
 
+//reducer to hold list of favorite images in state
+const favoritesList = (state = [], action) => {
+    console.log('in favoritesList');
+    switch (action.type) {
+        case 'DISPLAY_FAVORITE_IMAGES':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
+//get images to be displayed on search page
 function* getImages(action) {
     try {
         const imageResponse = yield axios.get(`/api/giphy/${action.payload}`);
@@ -28,7 +40,8 @@ function* getImages(action) {
     }
 }//end saga function*/
 
-function* favoriteImage(action) {
+//set favorite images from the search page
+function* setFavoriteImage(action) {
     try {
         yield axios.post('/api/favorite/', action.payload);
         // yield put({ type: 'GET_IMAGES' });
@@ -37,12 +50,23 @@ function* favoriteImage(action) {
     }
 }//end saga function*/
 
+function* getFavoriteImages() {
+    try {
+        const favoritesResponse = yield axios.get(`/api/favorite`);
+        yield put({ type: 'DISPLAY_FAVORITE_IMAGES', payload: favoritesResponse.data.data })
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 // saga function to listen for actions
 function* watcherSaga() {
     console.log('in watcherSaga');
     //yield takeEvery(type, function);
     yield takeEvery('GET_IMAGES', getImages);
-    yield takeEvery('FAVORITE_IMAGE', favoriteImage);
+    yield takeEvery('FAVORITE_IMAGE', setFavoriteImage);
+    yield takeEvery('GET_FAVORITES', getFavoriteImages);
 
 }
 
