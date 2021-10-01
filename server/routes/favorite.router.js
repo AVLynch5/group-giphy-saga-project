@@ -34,6 +34,7 @@ router.post('/', (req, res) => {
       console.log('Error posting favorite query', error);
   res.sendStatus(500);
   });
+});
 
 
 // update given favorite with a category id
