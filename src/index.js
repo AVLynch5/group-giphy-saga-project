@@ -28,10 +28,10 @@ function* getImages(action) {
     }
 }//end saga function*/
 
-function* createImage(action) {
+function* favoriteImage(action) {
     try {
-        yield axios.post(`/api/giphy/${action.payload}`, { newImage: action.payload });
-        yield put({ type: 'GET_IMAGES' });
+        yield axios.post('/api/favorite/', action.payload);
+        // yield put({ type: 'GET_IMAGES' });
     } catch (error) {
         console.log(error);
     }
@@ -42,7 +42,7 @@ function* watcherSaga() {
     console.log('in watcherSaga');
     //yield takeEvery(type, function);
     yield takeEvery('GET_IMAGES', getImages);
-    yield takeEvery('CREATE_IMAGE', createImage);
+    yield takeEvery('FAVORITE_IMAGE', favoriteImage);
 
 }
 
